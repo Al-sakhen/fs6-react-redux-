@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./features/auth/authSlice";
 import storage from "redux-persist/lib/storage";
 import { getDefaultMiddleware } from "@reduxjs/toolkit";
+import { dummyJson } from "./services/dummyJson";
 
 const persistCounterConfig = {
     key: "counter",
@@ -27,8 +28,9 @@ export const store = configureStore({
         counter: persistedCounterReducer,
         theme: persistedThemeReducer,
         auth: authSlice,
+        dummyJson : dummyJson.reducer
     },
-    middleware: () => getDefaultMiddleware({ serializableCheck: false }),
+    middleware: () => getDefaultMiddleware({ serializableCheck: false }).concat([dummyJson.middleware]),
 });
 
 export const persistor = persistStore(store);
