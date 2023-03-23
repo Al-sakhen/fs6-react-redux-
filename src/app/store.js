@@ -1,9 +1,10 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import authSlice from "../features/auth/authSlice";
-import themeSlice from "../features/theme/themeSlice";
-import counterSlice from "./../features/counter/counterSlice";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { persistReducer, persistStore } from "redux-persist";
+import counterSlice from "./features/counter/counterSlice";
+import themeSlice from "./features/theme/themeSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./features/auth/authSlice";
+import storage from "redux-persist/lib/storage";
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
 
 const persistCounterConfig = {
     key: "counter",
@@ -15,9 +16,11 @@ const persistThemeConfig = {
     storage,
 };
 
-const persistedCounterReducer = persistReducer(persistCounterConfig,counterSlice )
-const persistedThemeReducer = persistReducer(persistThemeConfig,themeSlice )
-
+const persistedCounterReducer = persistReducer(
+    persistCounterConfig,
+    counterSlice
+);
+const persistedThemeReducer = persistReducer(persistThemeConfig, themeSlice);
 
 export const store = configureStore({
     reducer: {
@@ -25,7 +28,7 @@ export const store = configureStore({
         theme: persistedThemeReducer,
         auth: authSlice,
     },
-    middleware : () => getDefaultMiddleware({serializableCheck : false})
+    middleware: () => getDefaultMiddleware({ serializableCheck: false }),
 });
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

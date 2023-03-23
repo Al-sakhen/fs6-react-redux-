@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "../components/Navbar";
-import { toggleAutth } from "../features/auth/authSlice";
+import { toggleAutth } from "../app/features/auth/authSlice";
 import {
     decrement,
     increment,
     incrementWithPayload,
     reset,
-} from "../features/counter/counterSlice";
-import { toggleTheme } from "../features/theme/themeSlice";
+} from "../app/features/counter/counterSlice";
+import { toggleTheme } from "../app/features/theme/themeSlice";
 
 const Home = () => {
     // From redux store
